@@ -3,7 +3,7 @@ Google's Bard chatbot API for NodeJs
 
 ## Installation
 ```bash
- $ yarn add bard-nodejs
+ $ yarn add bard-bot
 ```
 
 ## Authentication
@@ -17,7 +17,7 @@ Go to https://bard.google.com/
 
 ```bash
 $ 
-usage: bard-nodejs --session SESSION
+usage: bard --session SESSION
 
 options:
   -h, --help         show this help message and exit
