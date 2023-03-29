@@ -1,11 +1,12 @@
 # Bard <img src="https://www.gstatic.com/lamda/images/favicon_v1_150160cddff7f294ce30.svg" width="35px" />
 Google's Bard chatbot API for NodeJs
 
+<img width="784" alt="Screenshot 2023-03-29 at 18 49 42" src="https://user-images.githubusercontent.com/28712999/228610864-7a663e06-6a27-418c-944b-4a2c6c1e2235.png">
+
 ## Installation
 ```bash
- $ yarn add bard-bot
+ $ npm i bard-bot -g
 ```
-
 ## Authentication
 Go to https://bard.google.com/
 
