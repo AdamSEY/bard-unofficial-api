@@ -1,5 +1,7 @@
 import axios from 'axios';
 import random from 'random'
+import cheerio from 'cheerio'
+import chalk from 'chalk'
 
 const BASE_URL = 'https://bard.google.com';
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36';
@@ -79,6 +81,14 @@ class Chatbot {
             return { content: `Google Bard encountered an error: ${resp.data}.` };
         }
         const jsonChatData = JSON.parse(chatData);
+        // check if properties exist
+        if (!jsonChatData[0] || !jsonChatData[1] || !jsonChatData[2] || !jsonChatData[3] || !jsonChatData[4]) {
+            if (jsonChatData[0] && jsonChatData[0][0]) {
+                return { content: jsonChatData[0][0] };
+            } else {
+                return { content: `Google Bard encountered an error: ${resp.data}.` };
+            }
+        }
         const results = {
             content: jsonChatData[0][0],
             conversationId: jsonChatData[1][0],
@@ -95,5 +105,43 @@ class Chatbot {
         this._reqid += 100000;
         return results;
     }
+    
+
+static htmlToCommandLine(html) {
+    const $ = cheerio.load(html);
+    const elements = $('body').children();
+    const styledElements = [];
+
+    elements.each(function (i, element) {
+        let styledElement;
+    
+        switch (element.name) {
+            case 'p':
+                styledElement = chalk.bold($(element).text());
+                break;
+            case 'ul':
+                const $listItems = $(element).find('li');
+                styledElement = $listItems
+                    .map((i, li) => chalk.yellow(`- ${$(li).text()}`))
+                    .get()
+                    .join('\n');
+                break;
+            case 'pre':
+                styledElement = chalk.gray($(element).find('code').text());
+                break;
+            case 'code':
+                styledElement = chalk.gray($(element).text());
+                break;
+            default:
+                styledElement = $(element).text();
+        }
+
+        styledElements.push(styledElement);
+    });
+
+    return styledElements.join('\n\n');
+}
+
+
 }
 export default Chatbot;

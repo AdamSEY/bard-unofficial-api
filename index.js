@@ -41,10 +41,11 @@ const markdown = new Markdown();
 
     try {
         while (true) {
-            console.log('You:');
-            const userPrompt = prompt('> ');
-            console.log();
-            if (userPrompt === '!exit') {
+            // console.log('You:');
+            const userPrompt = prompt('You: > ');
+        
+            if (userPrompt === '!exit' || userPrompt === null || userPrompt === undefined || userPrompt === '') {
+                console.log('Exiting...');   
                 break;
             } else if (userPrompt === '!reset') {
                 chatbot.conversationId = '';
@@ -52,10 +53,10 @@ const markdown = new Markdown();
                 chatbot.choiceId = '';
                 continue;
             }
-            console.log('Google Bard:');
+            // console.log('Google Bard:');
             const response = await chatbot.ask(userPrompt);
-            console.log(markdown.render(response.content));
-        
+            console.log('Google Bard:',ChatBot.htmlToCommandLine(markdown.render(response.content)) + '\n\n');
+
         }
     } catch (error) {
         console.error(error.message);
