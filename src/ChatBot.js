@@ -89,7 +89,9 @@ class Chatbot {
         };
         this.conversationId = results.conversationId;
         this.responseId = results.responseId;
-        this.choiceId = results.choices[0].id;
+        // choiseId might be undefined
+
+        this.choiceId = results.choices[0]?.id || "Google Bard couldn't answer this question.";
         this._reqid += 100000;
         return results;
     }
