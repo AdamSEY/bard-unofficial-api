@@ -1,5 +1,5 @@
 {
-  "name": "bard-js",
+  "name": "bard-nodejs",
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
