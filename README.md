@@ -17,7 +17,7 @@ Go to https://bard.google.com/
 
 ```bash
 $ 
-usage: bard-js --session SESSION
+usage: bard-nodejs --session SESSION
 
 options:
   -h, --help         show this help message and exit
